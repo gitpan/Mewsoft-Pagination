@@ -2,7 +2,7 @@
 #==========================================================
 #Module Name      : Mewsoft::Pagination
 #Program Author   : Ahmed Amin Elsheshtawy
-#Home Page          : http://www.islamware.com
+#Home Page          : http://www.mewsoft.com
 #Contact Email      : support@mewsoft.com
 #Copyrights © 2008 Mewsoft Corp. All rights reserved.
 #==========================================================
@@ -13,7 +13,7 @@ package Mewsoft::Pagination;
 #1. the process of numbering the pages of a book.
 #2. the number and arrangement of pages, as might be noted in a bookseller’s catalogue.
 
-$VERSION = '0.10';
+$VERSION = '0.20';
 
 use strict;
 
