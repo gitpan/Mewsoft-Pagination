@@ -1,9 +1,10 @@
 #=Copyright Infomation
 #==========================================================
 #Module Name      : Mewsoft::Pagination
-#Program Author   : Ahmed Amin Elsheshtawy
+#Program Author   : Dr. Ahmed Amin Elsheshtawy, Ph.D. Physics
 #Home Page          : http://www.mewsoft.com
 #Contact Email      : support@mewsoft.com
+#Products               : Auction, Classifieds, Directory, PPC, Forums, Snapshotter
 #Copyrights © 2008 Mewsoft Corp. All rights reserved.
 #==========================================================
 #==========================================================
@@ -13,7 +14,7 @@ package Mewsoft::Pagination;
 #1. the process of numbering the pages of a book.
 #2. the number and arrangement of pages, as might be noted in a bookseller’s catalogue.
 
-$VERSION = '0.20';
+$VERSION = '0.40';
 
 use strict;
 
@@ -191,6 +192,8 @@ my ($self) = shift;
 	$self->{last_page} = 1 if ($self->{last_page} < 1);
 	$self->{total_pages} = $self->{last_page};
 
+	if ($self->{current_page} > $self->{last_page}) {$self->{current_page} = $self->{last_page};}
+
 	$self->{first_page} = 1;  #always = 1
 
 	# calculate the first data entry on the current page
@@ -226,7 +229,11 @@ my ($self) = shift;
 	
 	#calculate pages sets
 	$self->_calculate_visible_pages();
-
+	
+	#check if the first page is currently in the pages set displayed
+	$self->{first_page_in_set} = @{$self->{Page_Set_Pages}}[0] == 1 ? 1 : 0;
+	#check if the last page is currently in the pages set displayed
+	$self->{last_page_in_set} = @{$self->{Page_Set_Pages}}[$#{$self->{Page_Set_Pages}}] == $self->{last_page} ? 1 : 0;
 }
 #==========================================================
 
@@ -442,6 +449,35 @@ sub next_page {
 my ($self) = shift;
 	return $self->{next_page};
 }
+#==========================================================
+
+=head2 first_page_in_set()
+
+  $paginate->first_page_in_set();
+
+Returns 1 if the first page is in the current pages set. Otherwise it returns 0.
+
+=cut
+
+sub first_page_in_set {
+my ($self) = shift;
+	return $self->{first_page_in_set};
+}
+#==========================================================
+
+=head2 last_page_in_set()
+
+  $paginate->last_page_in_set();
+
+Returns 1 if the last page is in the current pages set. Otherwise it returns 0.
+
+=cut
+
+sub last_page_in_set {
+my ($self) = shift;
+	return $self->{last_page_in_set};
+}
+#==========================================================
 #==========================================================
 #==========================================================
 # The code below originally from the module Data::Pageset
